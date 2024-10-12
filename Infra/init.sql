@@ -1,0 +1,15 @@
+﻿CREATE DATABASE IF NOT EXISTS RunningTrackerDb;
+
+USE RunningTrackerDb;
+
+CREATE TABLE IF NOT EXISTS Runs (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Distance FLOAT NOT NULL,
+    Duration TIME NOT NULL,
+    Pace FLOAT NOT NULL,
+    Date DATE NOT NULL,
+    StartTime TIME NOT NULL,
+    EndTime TIME NOT NULL,
+    CreatedAt DATETIME NOT NULL,
+    UpdatedAt DATETIME NOT NULL
+);
