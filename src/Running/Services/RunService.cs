@@ -1,6 +1,7 @@
 using RunningTracker.Dto;
 using RunningTracker.Models;
 using RunningTracker.Repositories;
+using RunningTracker.Utils;
 
 namespace RunningTracker.Services
 {
@@ -15,17 +16,7 @@ namespace RunningTracker.Services
 
         public async Task<Run> AddRunAsync(RunDto runDto)
         {
-            var run = new Run
-            {
-                Distance = runDto.Distance,
-                Duration = runDto.Duration,
-                Date = runDto.Date.Date,
-                StartTime = runDto.Date.TimeOfDay,
-                EndTime = runDto.Date.TimeOfDay.Add(runDto.Duration),
-                Pace = CalculatePace(runDto.Distance, runDto.Duration),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
+            var run = runDto.AddRunAdapt();
 
             return await _runRepository.AddRunAsync(run);
         }
@@ -53,13 +44,7 @@ namespace RunningTracker.Services
                 throw new KeyNotFoundException("Run not found");
             }
 
-            existingRun.Distance = runDto.Distance;
-            existingRun.Duration = runDto.Duration;
-            existingRun.Date = runDto.Date.Date;
-            existingRun.StartTime = runDto.Date.TimeOfDay;
-            existingRun.EndTime = runDto.Date.TimeOfDay.Add(runDto.Duration);
-            existingRun.Pace = CalculatePace(runDto.Distance, runDto.Duration);
-            existingRun.UpdatedAt = DateTime.UtcNow;
+            existingRun.UpdateRunFromDto(runDto);
 
             return await _runRepository.UpdateRunAsync(existingRun);
         }
@@ -73,12 +58,5 @@ namespace RunningTracker.Services
         {
             await _runRepository.DeleteAllRunsAsync();
         }
-
-        private double CalculatePace(double distance, TimeSpan duration)
-        {
-            return duration.TotalMinutes / distance;
-        }
-
-
     }
 }
