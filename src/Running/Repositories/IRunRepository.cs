@@ -8,8 +8,10 @@ namespace RunningTracker.Repositories
     {
         Task<Run> AddRunAsync(Run run);
         Task<IEnumerable<Run>> GetAllRunsAsync();
+        Task<IEnumerable<Run>> GetRunsByDateAsync(DateTime date);
         Task<Run> GetRunByIdAsync(int id);
         Task<Run> UpdateRunAsync(Run run);
         Task DeleteRunAsync(int id);
+        Task DeleteAllRunsAsync();
     }
 }

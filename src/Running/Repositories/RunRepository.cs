@@ -39,6 +39,16 @@ namespace RunningTracker.Repositories
             }
         }
 
+        public async Task<IEnumerable<Run>> GetRunsByDateAsync(DateTime date)
+        {
+            const string sql = "SELECT * FROM Runs WHERE Date = @Date;";
+
+            using (var connection = _dbConnectionFactory.CreateConnection())
+            {
+                return await connection.QueryAsync<Run>(sql, new { Date = date });
+            }
+        }
+
         public async Task<Run> GetRunByIdAsync(int id)
         {
             const string sql = "SELECT * FROM Runs WHERE Id = @Id;";
@@ -69,6 +79,15 @@ namespace RunningTracker.Repositories
             using (var connection = _dbConnectionFactory.CreateConnection())
             {
                 await connection.ExecuteAsync(sql, new { Id = id });
+            }
+        }
+
+        public async Task DeleteAllRunsAsync()
+        {
+            const string sql = "DELETE FROM Runs;";
+            using (var connection = _dbConnectionFactory.CreateConnection())
+            {
+                await connection.ExecuteAsync(sql);
             }
         }
     }

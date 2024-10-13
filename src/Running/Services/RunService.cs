@@ -1,9 +1,6 @@
 using RunningTracker.Dto;
 using RunningTracker.Models;
 using RunningTracker.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace RunningTracker.Services
 {
@@ -38,6 +35,11 @@ namespace RunningTracker.Services
             return await _runRepository.GetAllRunsAsync();
         }
 
+        public async Task<IEnumerable<Run>> GetRunsByDateAsync(DateTime date)
+        {
+            return await _runRepository.GetRunsByDateAsync(date);
+        }
+
         public async Task<Run> GetRunByIdAsync(int id)
         {
             return await _runRepository.GetRunByIdAsync(id);
@@ -67,9 +69,16 @@ namespace RunningTracker.Services
             await _runRepository.DeleteRunAsync(id);
         }
 
+        public async Task DeleteAllRunsAsync()
+        {
+            await _runRepository.DeleteAllRunsAsync();
+        }
+
         private double CalculatePace(double distance, TimeSpan duration)
         {
             return duration.TotalMinutes / distance;
         }
+
+
     }
 }

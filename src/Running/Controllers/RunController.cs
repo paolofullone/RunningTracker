@@ -21,6 +21,15 @@ namespace RunningTracker.Controllers
         public async Task<ActionResult<IEnumerable<Run>>> GetAllRuns()
         {
             var runs = await _runService.GetAllRunsAsync();
+            if (runs is null) return new List<Run>();
+            return Ok(runs);
+        }
+
+        [HttpGet("date/{date}")]
+        public async Task<ActionResult<IEnumerable<Run>>> GetRunsByDate(DateTime date)
+        {
+            var runs = await _runService.GetRunsByDateAsync(date);
+            if (runs is null) return new List<Run>();
             return Ok(runs);
         }
 
@@ -43,7 +52,7 @@ namespace RunningTracker.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Run>> UpdateRun(int id, RunDto runDto)
+        public async Task<ActionResult<Run>> UpdateRunAsync(int id, RunDto runDto)
         {
             try
             {
@@ -57,9 +66,16 @@ namespace RunningTracker.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRun(int id)
+        public async Task<IActionResult> DeleteRunAsync(int id)
         {
             await _runService.DeleteRunAsync(id);
+            return NoContent();
+        }
+
+        [HttpDelete("/all")]
+        public async Task<IActionResult> DeleteAllRuns()
+        {
+            await _runService.DeleteAllRunsAsync();
             return NoContent();
         }
     }

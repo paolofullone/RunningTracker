@@ -7,8 +7,10 @@ namespace RunningTracker.Services
     {
         Task<Run> AddRunAsync(RunDto runDto);
         Task<IEnumerable<Run>> GetAllRunsAsync();
+        Task<IEnumerable<Run>> GetRunsByDateAsync(DateTime date);
         Task<Run> GetRunByIdAsync(int id);
         Task<Run> UpdateRunAsync(int id, RunDto runDto);
         Task DeleteRunAsync(int id);
+        Task DeleteAllRunsAsync();
     }
 }
