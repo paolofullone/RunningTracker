@@ -15,5 +15,8 @@ namespace FunctionalTests.Apis
 
         [Post("/api/v1/run")]
         Task<Run> AddRun(RunDto runDto);
+
+        [Delete("/api/v1/run/{id}")]
+        Task<IApiResponse> DeleteRun(int id);
     }
 }

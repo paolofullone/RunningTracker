@@ -4,7 +4,7 @@ An api to track runs
 
 @NoTagsAtAll
 Scenario: Insert Run
-	Given That we want to insert a run:
+	Given That we want to insert some runs:
 	| Distance | Duration | Date                     |
 	| 10       | 1:00:00  | 2024-10-14T07:00:00.000Z |
 	| 12       | 1:12:00  | 2024-10-16T07:00:00.000Z |
@@ -13,8 +13,8 @@ Scenario: Insert Run
 	| 16       | 1:33:00  | 2024-10-22T07:00:00.000Z |
 	| 17       | 1:36:00  | 2024-10-24T07:00:00.000Z |
 	| 18       | 1:39:00  | 2024-10-26T07:00:00.000Z |
-	When We request the POST api endpoint
-	Then A Run is stored in database
+	When We request to insert some runs
+	Then The runs are inserted, then the test validates and deletes them
 
 
 

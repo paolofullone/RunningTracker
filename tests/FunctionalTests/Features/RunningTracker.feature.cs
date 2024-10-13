@@ -138,13 +138,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "1:39:00",
                             "2024-10-26T07:00:00.000Z"});
 #line 7
- await testRunner.GivenAsync("That we want to insert a run:", ((string)(null)), table1, "Given ");
+ await testRunner.GivenAsync("That we want to insert some runs:", ((string)(null)), table1, "Given ");
 #line hidden
 #line 16
- await testRunner.WhenAsync("We request the POST api endpoint", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("We request to insert some runs", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 17
- await testRunner.ThenAsync("A Run is stored in database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("The runs are inserted, then the test validates and deletes them", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

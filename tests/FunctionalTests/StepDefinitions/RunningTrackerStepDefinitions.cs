@@ -18,14 +18,14 @@ namespace FunctionalTests.StepDefinitions
             _cancellationToken = CancellationToken.None;
         }
 
-        [Given("That we want to insert a run:")]
-        public async Task GivenThatWeWantToInsertARun(DataTable dataTable)
+        [Given("That we want to insert some runs:")]
+        public async Task GivenThatWeWantToInsertSomenRuns(DataTable dataTable)
         {
             var runRequests = dataTable.CreateSet<RunDto>().ToList();
             _scenarioContext.Set(runRequests, "runRequests");
         }
 
-        [When("We request the POST api endpoint")]
+        [When("We request to insert some runs")]
         public async Task WhenWeRequestThePOSTApiEndpoint()
         {
             var runRequests = _scenarioContext.Get<IEnumerable<RunDto>>("runRequests");
@@ -35,7 +35,7 @@ namespace FunctionalTests.StepDefinitions
             }
         }
 
-        [Then("A Run is stored in database")]
+        [Then("The runs are inserted, then the test validates and deletes them")]
         public async Task ThenARunIsStoredInDatabase()
         {
             await _driver.ValidateSucecess(_cancellationToken);
