@@ -11,6 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunningTracker", "src\Runni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalTests", "tests\FunctionalTests\FunctionalTests.csproj", "{8393C9E4-54CD-4892-AC52-D782E1BF8546}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{89E1C8E0-3D6B-4A06-A554-3B4DE0AB722A}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedTests", "tests\IntegratedTests\IntegratedTests.csproj", "{FEBA6FC6-E27E-489F-9ECE-629EBCDA5295}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +32,10 @@ Global
 		{8393C9E4-54CD-4892-AC52-D782E1BF8546}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8393C9E4-54CD-4892-AC52-D782E1BF8546}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8393C9E4-54CD-4892-AC52-D782E1BF8546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEBA6FC6-E27E-489F-9ECE-629EBCDA5295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEBA6FC6-E27E-489F-9ECE-629EBCDA5295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEBA6FC6-E27E-489F-9ECE-629EBCDA5295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEBA6FC6-E27E-489F-9ECE-629EBCDA5295}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5440F614-2EFD-4BAE-9D67-6A135A68DE5C} = {8A43FAD8-78EB-41B5-8BF2-E2E1846EFF5B}
 		{8393C9E4-54CD-4892-AC52-D782E1BF8546} = {906838BB-669D-4351-8DEB-932F3CF9AD3F}
+		{FEBA6FC6-E27E-489F-9ECE-629EBCDA5295} = {906838BB-669D-4351-8DEB-932F3CF9AD3F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F67B711C-7D58-4FAA-ADDE-795AB39FB374}
