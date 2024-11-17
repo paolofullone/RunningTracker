@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace RunningTracker.Infra
 {
@@ -15,7 +16,7 @@ namespace RunningTracker.Infra
 
         public IDbConnection CreateConnection()
         {
-            return new MySqlConnection(_config.MySQL);
+            return new SqlConnection(_config.MSSQL);
         }
     }
 }

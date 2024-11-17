@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{89E1C8E0-3D6B-4A06-A554-3B4DE0AB722A}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yaml = docker-compose.yaml
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedTests", "tests\IntegratedTests\IntegratedTests.csproj", "{FEBA6FC6-E27E-489F-9ECE-629EBCDA5295}"

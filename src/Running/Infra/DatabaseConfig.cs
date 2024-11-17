@@ -2,6 +2,6 @@
 {
     public class DatabaseConfig
     {
-        public string MySQL { get; set; }
+        public string MSSQL { get; set; }
     }
 }
