@@ -57,3 +57,9 @@ namespace IntegratedTests.Configuration
         }
     }
 }
+
+// I've decided to leave both configs here, the one needed for testcontainers and if we run via docker compose, only the ConfigureWebHost method will be used.
+
+// I could remove the docker-compose, initialization files at src/Infra and it would work fine.
+
+// To see it in action, open the docker while the test runs, it will be created and destroyed. 
