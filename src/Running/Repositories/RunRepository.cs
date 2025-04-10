@@ -35,14 +35,14 @@ public class RunRepository : IRunRepository
 
     public async Task<IEnumerable<Run>> GetAllRunsAsync()
     {
-        const string sql = "SELECT * FROM Runs;";
+        const string sql = "SELECT Id, Distance, Duration, Pace, Date, StartTime, EndTime, CreatedAt, UpdatedAt FROM Runs;";
         using var connection = _dbConnectionFactory.CreateConnection();
         return await connection.QueryAsync<Run>(sql);
     }
 
     public async Task<IEnumerable<Run>> GetRunsByDateAsync(DateTime date)
     {
-        const string sql = "SELECT * FROM Runs WHERE Date = @Date;";
+        const string sql = "SELECT Id, Distance, Duration, Pace, Date, StartTime, EndTime, CreatedAt, UpdatedAt FROM Runs WHERE Date = @Date;";
 
         using var connection = _dbConnectionFactory.CreateConnection();
         return await connection.QueryAsync<Run>(sql, new { Date = date });
@@ -50,7 +50,7 @@ public class RunRepository : IRunRepository
 
     public async Task<Run> GetRunByIdAsync(int id)
     {
-        const string sql = "SELECT * FROM Runs WHERE Id = @Id;";
+        const string sql = "SELECT Id, Distance, Duration, Pace, Date, StartTime, EndTime, CreatedAt, UpdatedAt FROM Runs WHERE Id = @Id;";
         using var connection = _dbConnectionFactory.CreateConnection();
         return await connection.QuerySingleOrDefaultAsync<Run>(sql, new { Id = id }) ?? new Run();
     }
