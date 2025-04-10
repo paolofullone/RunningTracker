@@ -1,23 +1,19 @@
-version: '3.8'
-
 services:
   sqlserver:
-    build: .
-    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-running
     environment:
-      SA_PASSWORD: "@Password123"
-      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password123!"
+      ACCEPT_EULA: 'Y'
+      MSSQL_PID: 'Developer'
     ports:
       - "1433:1433"
-    volumes:
-      - ./src/Running/Infra/init.sql:/tmp/init.sql
-      - ./src/Running/Infra/entrypoint.sh:/tmp/entrypoint.sh
 
   mssqltools:
     image: mcr.microsoft.com/mssql-tools
+    container_name: mssqltools-running
     depends_on:
       - sqlserver
     volumes:
-      - ./src/Running/Infra/init.sql:/tmp/init.sql
-      - ./src/Running/Infra/entrypoint.sh:/tmp/entrypoint.sh
-    command: /bin/bash /tmp/entrypoint.sh
+      - ./src/Running/Infra/:/tmp/
+    command: /bin/bash -c "ls /tmp/ && sleep 45 && chmod +x /tmp/entrypoint.sh && /tmp/entrypoint.sh"
