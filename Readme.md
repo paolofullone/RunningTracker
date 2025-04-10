@@ -1,8 +1,12 @@
 # Running API Project
 
-This is an backend API project that allows users to track their running activities. The project is built using .NET 8 amd a very tinny architecture.
+## Description
 
-For the database I choose the MySQL due to the fact that it's a very popular database and it's easy to use. The database is running on a docker container.
+This is an backend API project that allows users to track their running activities. The project is built using .NET 8.
+
+## Purpose of the project
+
+In this project my purpose is to Highlight the tests we can use and the purpose of each one of them.
 
 ## Installation
 
@@ -10,40 +14,74 @@ For the database I choose the MySQL due to the fact that it's a very popular dat
 2. Run docker-compose up to initialize database
 3. Run the project via Visual Studio
 
-## Docker compose commands and issues
+### Docker compose commands and issues
 
-If the script is modified, we need to remove the volume then run the docker-compose up again.
+To run the docker compose and create the database:
 
 ```bash
-docker-compose down -v
 docker-compose up
 ```
 
+## Unit Tests
+
+Unit tests are designed to test individual components or methods in isolation. They are typically fast and should not depend on external systems like databases or APIs. In this project, unit tests are used to verify the correctness of the business logic and data access layer.
+
+I personally like to see the unit tests as a helper to myself of the future, whenever I am making any maintenance I always prefer to use the strategy of doing small changes and validating them with tests, and the unit tests are very handfull to see if a test broke were we expected or if in some other part of the code I didn't touched something happened as well.
+
+
 ## FunctionalTests
+
+The functional tests are very handfull on a distributed systems with microservice architecture, let's imagine our API needs to collect data from a database (or other API's), in this test we can run it in a pre-production stage or even production and really make a request to an endpoint and check for the response, validating the communication with other apis, databases etc.
 
 In order to run the functional tests, you need to run the project first. Then, you can run the tests.
 
-To run the project, it's faster to navigate to the project folder (RunningTracker\src\Running\bin\Debug\net8.0) and run the following command:
+I usually run the project via command line:
 
 ```bash
-dotnet RunningTracker.dll
+cd src/Running
+dotnet run
 ```
+
+<img src="./images/run_cmd.png">
 
 Then you can run the tests via Visual Studio.
 
 ## Integrated Tests
 
-In order to run the integrated tests, you need to run the docker compose file first. Then, you can run the tests.
+The integrated tests are great to validate if everything works as it should really as an integration. So we can test all our logic with a database setup exclusivelly for the test. It is awesome to check if new functionalities or even a maintenance didn't changed something it was not suposed to change.
 
-To run the docker compose file, you can run the following command:
+This test actually has two setups inside it.
+
+It will setup the application using TestApplicationFactory and also using TestContainers. Only one of them is necessary.
+
+In order to run the integrated tests using docker, you need to run the docker compose first:
 
 ```bash
 docker-compose up
 ```
 
-Then you can run the tests via Visual Studio.
+After the docker compose is up, we can run the tests via Visual Studio.
 
-The integrated tests can be executed using the docker-compose file that will make use of src/Infra files init.sql and entrypoint.sh to create the database and run the project or only the testcontainer nuget already configured in the IntegratedTests project.
+<img src="./images//integrated_tests.png">
+
+
+But if you want to run only using TestContainers, you can remove the created containers:
+
+```bash
+docker compose down -v
+```
+
+And with a tool of your preference watch the containers, as I did using Docker here:
+
+<img src="./images/Docker.png">
+
+Once the test finishes you have no more running containers:
+
+<img src="./images/Docker_down.png">
+
+Executing with the docker-compose file it will make use of src/Infra files init.sql and entrypoint.sh to create the database and run the project 
+
+Executing with Testcontainer it will use the nuget already configured in the IntegratedTests project.
 
 I've had some issues running via testcontainers, had to split the database initializer into 2 methods and replace the Database in the connection string at builder.ConfigureServices:
 
@@ -131,5 +169,31 @@ public async Task InitializeDatabaseAsync()
         }
     }
 ```
+## Load Tests
 
-Maybe there is another way, but it worked like this, I am fine with it for now.
+Load tests are awesome to api's that will have many requests, we can have a stress test to check when the defined resource in terms of CPU and Memory will not support any more users for example, we can have a ramp of users to watch the degradation of response time etc.
+
+To adjust the right resources the load test is a very handful tool.
+
+For the Load Tests I am using the k6 tool, which is a great tool to run load tests.
+
+To run the tests, you need to run both the project and the docker compose first:
+
+```bash
+docker-compose up
+```
+
+Then, you can run the tests via command line, make sure you are in the right directory:
+
+<img src="./images/k6.png">
+
+This test is setup to generate the result both in the terminal and in a html file with the timestamp of the test.
+
+<img src="./images/k6_html.png">
+
+K6 can be used to test http/1.1, http/2, websockets, gRPC and even kafka.
+
+## Conclusion
+
+In a professional environment, all these tests can be setup together in a Full CI/CD pipeline. If such structure is not available we can always collect mannualy the result of each test to document any maintenance or new functionality.
+
