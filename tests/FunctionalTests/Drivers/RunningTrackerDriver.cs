@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FunctionalTests.Apis;
-using Refit;
 using RunningTracker.Dto;
 using RunningTracker.Models;
 

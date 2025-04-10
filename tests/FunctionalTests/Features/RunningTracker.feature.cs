@@ -88,14 +88,14 @@ namespace FunctionalTests.Features
         [Xunit.SkippableFactAttribute(DisplayName="Insert Run")]
         [Xunit.TraitAttribute("FeatureTitle", "Running Tracker")]
         [Xunit.TraitAttribute("Description", "Insert Run")]
-        [Xunit.TraitAttribute("Category", "NoTagsAtAll")]
+        [Xunit.TraitAttribute("Category", "IntegratedTests")]
         public async System.Threading.Tasks.Task InsertRun()
         {
             string[] tagsOfScenario = new string[] {
-                    "NoTagsAtAll"};
+                    "IntegratedTests"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Insert Run", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 6
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -137,13 +137,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "18",
                             "1:39:00",
                             "2024-10-26T07:00:00.000Z"});
-#line 7
+#line 8
  await testRunner.GivenAsync("That we want to insert some runs:", ((string)(null)), table1, "Given ");
 #line hidden
-#line 16
+#line 17
  await testRunner.WhenAsync("We request to insert some runs", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 17
+#line 18
  await testRunner.ThenAsync("The runs are inserted, then the test validates and deletes them", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

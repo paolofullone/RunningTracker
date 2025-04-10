@@ -16,6 +16,7 @@ namespace IntegratedTests.Controllers
             _applicationFactory = applicationFactory;
         }
 
+        [Trait("IntegratedTests","RunningTracker")]
         [Fact]
         public async Task GetRuns_ShouldReturnRuns()
         {
@@ -31,6 +32,7 @@ namespace IntegratedTests.Controllers
             response.EnsureSuccessStatusCode();
         }
 
+        [Trait("IntegratedTests", "RunningTracker")]
         [Fact]
         public async Task GetRunByDate_ShouldReturnRun()
         {

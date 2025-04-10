@@ -2,7 +2,8 @@
 
 An api to track runs
 
-@NoTagsAtAll
+@IntegratedTests
+
 Scenario: Insert Run
 	Given That we want to insert some runs:
 	| Distance | Duration | Date                     |
