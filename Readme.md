@@ -1,6 +1,6 @@
 # RunningTracker API
 
-This .NET 8 API tracks running activities, built to demonstrate comprehensive testing. I achieved 95% test coverage and validated 10k requests/sec, ensuring reliability.
+This .NET 8 API tracks running activities, built to demonstrate comprehensive testing and achieve +70% test coverage and validate 10k requests/sec, ensuring reliability.
 
 ## Overview
 
@@ -28,12 +28,12 @@ docker-compose up
 
 Unit tests are designed to test individual components or methods in isolation. They are typically fast and should not depend on external systems like databases or APIs. In this project, unit tests are used to verify the correctness of the business logic and data access layer.
 
-Unit tests ensure maintainable code, a practice I prioritize. Whenever I am making any maintenance I always prefer to use the strategy of doing small changes and validating them with tests, and the unit tests are very handful to see if a test broke were we expected or if in some other part of the code I didn't touched something happened as well.
+Unit tests ensure maintainable code, a practice I prioritize. Whenever I am making any maintenance I always prefer to use the strategy of doing small changes and validating them with tests, and the unit tests are very useful to see if a test broke were we expected or if in some other part of the code I didn't touched something happened as well.
 
 
 ## FunctionalTests
 
-The functional tests are very handful on a distributed systems with microservice architecture, let's imagine our API needs to collect data from a database (or other API's), in this test we can run it in a pre-production stage or even production and really make a request to an endpoint and check for the response, validating the communication with other apis, databases etc.
+The functional tests are very useful on a distributed systems with microservice architecture, let's imagine our API needs to collect data from a database (or other API's), in this test we can run it in a pre-production stage or even production and really make a request to an endpoint and check for the response, validating the communication with other APIs, databases etc.
 
 In order to run the functional tests, you need to run the project first. Then, you can run the tests.
 
@@ -50,22 +50,17 @@ Then you can run the tests via Visual Studio.
 
 ## Integrated Tests
 
-The integrated tests are ideal for verifying end-to-end integration. So we can test all our logic with a dedicated test database.. It is critical for high-traffic APIs to check if new functionalities or even a maintenance didn't changed something it was not supposed to change.
+The integrated tests are ideal for verifying end-to-end integration. So we can test all our logic with a dedicated test database. It is critical for high-traffic APIs to check if new functionalities or even a maintenance didn't alter unintended logic.
 
 This test actually has two setups inside it.
 
 It will setup the application using TestApplicationFactory and also using TestContainers. Only one of them is necessary.
 
-In order to run the integrated tests using docker, you need to run the docker compose first:
-
-```bash
-docker-compose up
-```
+In order to run the integrated tests using docker, make sure docker-compose was executed as explained above.
 
 After the docker compose is up, we can run the tests via Visual Studio.
 
 <img src="./images//integrated_tests.png">
-
 
 But if you want to run only using TestContainers, you can remove the created containers:
 
@@ -173,9 +168,9 @@ public async Task InitializeDatabaseAsync()
 ```
 ## Load Tests
 
-Load tests are awesome to api's that will have many requests, we can have a stress test to check when the defined resource in terms of CPU and Memory will not support any more users for example, we can have a ramp of users to watch the degradation of response time etc.
+Load tests are essential for high-traffic APIs, we can have a stress test to check when the defined resource in terms of CPU and Memory will not support any more users for example, we can have a ramp of users to watch the degradation of response time etc.
 
-To adjust the right resources the load test is a very handful tool.
+To adjust the right resources the load test is a very effective tool.
 
 For the Load Tests I am using the k6 tool, which is a great tool to run load tests.
 
@@ -201,5 +196,5 @@ Check my [portfolio](https://paolofullone.github.io/) to see my projects and art
 
 ## Conclusion
 
-In a professional environment, all these tests can be setup together in a Full CI/CD pipeline. If such structure is not available we can always collect mannually the result of each test to document any maintenance or new functionality.
+In a professional environment, all these tests can be setup together in a Full CI/CD pipeline. If such structure is not available we can always collect manually the result of each test to document any maintenance or new functionality.
 
