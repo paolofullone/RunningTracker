@@ -1,24 +1,46 @@
-﻿using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
-namespace RunningTracker.Extensions
+namespace RunningTracker.Extensions;
+
+public static class SwaggerExtensions
 {
-    public static class SwaggerExtensions
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        services.AddEndpointsApiExplorer();
+
+        services.AddAuthorization();
+
+        services.AddSwaggerGen(c =>
         {
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen(c =>
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "RunningTracker", Version = "v1" });
+
+            // Add JWT Authentication to Swagger
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RunningTracker API", Version = "v1" });
-                c.MapType<TimeSpan>(() => new OpenApiSchema
-                {
-                    Type = "string",
-                    Format = "duration",
-                    Example = new OpenApiString("01:00:00")
-                });
+                Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
             });
-            return services;
-        }
+
+            // Require JWT for all endpoints by default
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] { }
+                }
+            });
+        });
+
+        return services;
     }
 }

@@ -1,15 +1,14 @@
-using RunningTracker.Dto;
 using RunningTracker.Models;
 
-namespace RunningTracker.Services;
+namespace RunningTracker.Infrastructure.Repositories.Run;
 
-public interface IRunService
+public interface IRunRepository
 {
-    Task<RunActivity> AddRunAsync(RunDto runDto);
+    Task<RunActivity> AddRunAsync(RunActivity run);
     Task<IEnumerable<RunActivity>> GetAllRunsAsync();
     Task<IEnumerable<RunActivity>> GetRunsByDateAsync(DateTime date);
     Task<RunActivity> GetRunByIdAsync(int id);
-    Task<RunActivity> UpdateRunAsync(int id, RunDto runDto);
+    Task<RunActivity> UpdateRunAsync(RunActivity run);
     Task DeleteRunAsync(int id);
     Task DeleteAllRunsAsync();
 }

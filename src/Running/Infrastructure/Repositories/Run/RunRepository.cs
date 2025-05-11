@@ -1,8 +1,8 @@
 using Dapper;
-using RunningTracker.Infra;
+using RunningTracker.Infrastructure.Database;
 using RunningTracker.Models;
 
-namespace RunningTracker.Repositories;
+namespace RunningTracker.Infrastructure.Repositories.Run;
 
 public class RunRepository : IRunRepository
 {
@@ -13,7 +13,7 @@ public class RunRepository : IRunRepository
         _dbConnectionFactory = dbConnectionFactory;
     }
 
-    public async Task<Run> AddRunAsync(Run run)
+    public async Task<RunActivity> AddRunAsync(RunActivity run)
     {
         const string sql = """
                                INSERT INTO Runs (Distance, Duration, Pace, Date, StartTime, EndTime, CreatedAt, UpdatedAt)
@@ -33,29 +33,29 @@ public class RunRepository : IRunRepository
         return run;
     }
 
-    public async Task<IEnumerable<Run>> GetAllRunsAsync()
+    public async Task<IEnumerable<RunActivity>> GetAllRunsAsync()
     {
         const string sql = "SELECT Id, Distance, Duration, Pace, Date, StartTime, EndTime, CreatedAt, UpdatedAt FROM Runs;";
         using var connection = _dbConnectionFactory.CreateConnection();
-        return await connection.QueryAsync<Run>(sql);
+        return await connection.QueryAsync<RunActivity>(sql);
     }
 
-    public async Task<IEnumerable<Run>> GetRunsByDateAsync(DateTime date)
+    public async Task<IEnumerable<RunActivity>> GetRunsByDateAsync(DateTime date)
     {
         const string sql = "SELECT Id, Distance, Duration, Pace, Date, StartTime, EndTime, CreatedAt, UpdatedAt FROM Runs WHERE Date = @Date;";
 
         using var connection = _dbConnectionFactory.CreateConnection();
-        return await connection.QueryAsync<Run>(sql, new { Date = date });
+        return await connection.QueryAsync<RunActivity>(sql, new { Date = date });
     }
 
-    public async Task<Run> GetRunByIdAsync(int id)
+    public async Task<RunActivity> GetRunByIdAsync(int id)
     {
         const string sql = "SELECT Id, Distance, Duration, Pace, Date, StartTime, EndTime, CreatedAt, UpdatedAt FROM Runs WHERE Id = @Id;";
         using var connection = _dbConnectionFactory.CreateConnection();
-        return await connection.QuerySingleOrDefaultAsync<Run>(sql, new { Id = id }) ?? new Run();
+        return await connection.QuerySingleOrDefaultAsync<RunActivity>(sql, new { Id = id }) ?? new RunActivity();
     }
 
-    public async Task<Run> UpdateRunAsync(Run run)
+    public async Task<RunActivity> UpdateRunAsync(RunActivity run)
     {
         const string sql = @"
                 UPDATE Runs

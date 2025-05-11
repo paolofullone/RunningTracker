@@ -1,13 +1,12 @@
-﻿using RunningTracker.Infra;
+﻿using RunningTracker.Infrastructure.Database;
 
-namespace RunningTracker.Extensions
+namespace RunningTracker.Extensions;
+
+public static class ConfigurationExtensions
 {
-    public static class ConfigurationExtensions
+    public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.Configure<DatabaseConfig>(configuration.GetSection("ConnectionStrings"));
-            return services;
-        }
+        services.Configure<DatabaseConfig>(configuration.GetSection("ConnectionStrings"));
+        return services;
     }
 }

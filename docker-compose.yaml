@@ -8,6 +8,7 @@ services:
       MSSQL_PID: 'Developer'
     ports:
       - "1433:1433"
+    restart: always
 
   mssqltools:
     image: mcr.microsoft.com/mssql-tools
@@ -15,5 +16,5 @@ services:
     depends_on:
       - sqlserver
     volumes:
-      - ./src/Running/Infra/:/tmp/
+      - ./src/Running/Infrastructure/Data/:/tmp/
     command: /bin/bash -c "ls /tmp/ && sleep 45 && chmod +x /tmp/entrypoint.sh && /tmp/entrypoint.sh"

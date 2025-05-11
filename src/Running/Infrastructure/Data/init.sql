@@ -56,3 +56,25 @@ VALUES (
     GETDATE()
 );
 GO
+
+-- Users
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(256) NOT NULL,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    IsActive BIT NOT NULL DEFAULT 1, -- Logical deletion (1 = active, 0 = deactivated)
+    CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+    UpdatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE()
+);
+
+-- Insert 5 random users
+INSERT INTO Users (Username, Email, PasswordHash, FirstName, LastName, IsActive, CreatedAt, UpdatedAt)
+VALUES
+    ('joe.fullone@gmail.com', '$2a$11$3qZ5gY8Y9gZ5Xz6kY8Y9gY8Y9gZ5Xz6kY8Y9gY8Y9gZ5Xz6kY8Y9', 'Joe', 'Fullone', 1, GETUTCDATE(), GETUTCDATE()),
+    ('lola.fullone@yahoo.com', '$2a$11$3qZ5gY8Y9gZ5Xz6kY8Y9gY8Y9gZ5Xz6kY8Y9gY8Y9gZ5Xz6kY8Y9', 'Lola', 'Fullone', 1, GETUTCDATE(), GETUTCDATE());
+
+
+-- Verify the inserted users
+SELECT * FROM Users;

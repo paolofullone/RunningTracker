@@ -8,12 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="appsettings-integrated.json"/>
+        <None Remove="appsettings-integrated.json" />
         <None Update="bin\Debug\net8.0\testhost.deps.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Remove="Data\initializer.sql"/>
-        <None Remove="Data\**"/>
+        <None Remove="Data\initializer.sql" />
+        <None Remove="Data\**" />
+        <None Remove="Scripts\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,32 +26,30 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Scripts\"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.10"/>
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.10"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
-        <PackageReference Include="Testcontainers" Version="4.0.0"/>
-        <PackageReference Include="Testcontainers.MsSql" Version="4.0.0"/>
-        <PackageReference Include="xunit" Version="2.9.2"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.15" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.15" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+        <PackageReference Include="Testcontainers" Version="4.4.0" />
+        <PackageReference Include="Testcontainers.MsSql" Version="4.4.0" />
+        <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Running\RunningTracker.csproj"/>
+        <ProjectReference Include="..\..\src\Running\RunningTracker.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Data\**"/>
+        <Compile Remove="Data\**" />
+        <Compile Remove="Scripts\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="Data\**"/>
+        <EmbeddedResource Remove="Data\**" />
+        <EmbeddedResource Remove="Scripts\**" />
     </ItemGroup>
 
 </Project>
